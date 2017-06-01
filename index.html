@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HFUT Cloud Print</title>
+        <link rel="stylesheet" href="{{ static_url("css/semantic.min.css") }}" type="text/css" media="all" />
+    </head>
+    <body style="background-color: #CCC4C2">
+    <div class="ui white massive main menu">
+        <div class="ui container">
+            <a href="/" class="header item">
+                HFUT云打印
+            </a>
+        </div>
+    </div>
+    <div class="ui container">
+        <div class="ui message">
+            <div class="header">New Site Features </div>
+            <ul class="list">
+                <li>You can now have cover images on blog pages</li>
+                <li>Drafts will now auto-save while writing</li>
+                <li>Drafts will now auto-save while writing</li>
+                <li>Drafts will now auto-save while writing</li>
+            </ul>
+        </div>    
+        <div class="ui segment">
+            <form class="ui form" action='./upload' enctype="multipart/form-data" method='post'>
+                <div class="field">
+                    <label>姓名</label>
+                    <input name="name" placeholder="姓名" type="text" />
+                </div>
+                <div class="field">
+                    <label>学号</label>
+                    <input name="student_number" placeholder="学号" type="text" />
+                </div>
+                <div class="field">
+                    <label>手机号</label>
+                    <input name="phone_number" placeholder="手机号" type="text" />
+                </div>        
+                <div class="field">
+                    <label>需要打印的pdf文件</label>
+                    <input type='file' name='file' />
+                </div>
+                <button class="ui button" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ static_url("js/jquery.min.js") }}"></script>
+    <script src="{{ static_url("js/semantic.min.js") }}"></script>
+    </body>
+</html>
