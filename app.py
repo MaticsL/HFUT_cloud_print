@@ -19,6 +19,7 @@ class UploadFileHandler(tornado.web.RequestHandler):
         name = self.get_argument('name', '')
         student_number = self.get_argument('student_number', '')
         phone_number = self.get_argument('phone_number', '')
+        remark = self.get_argument('remark', '')
 
 
         if not(name and student_number and phone_number):
@@ -48,7 +49,7 @@ class UploadFileHandler(tornado.web.RequestHandler):
             # save other info
             filepath = os.path.join(upload_path, dir_prefix, 'info.txt')
             with open(filepath, 'w') as info:
-                info.write('\n'.join([name, student_number, phone_number]))
+                info.write('\n'.join([name, student_number, phone_number, '-------', remark]))
             return self.render('result.html', result='positive', result_header='Upload Success', result_content='Please connect us to get the file.')
 
 
