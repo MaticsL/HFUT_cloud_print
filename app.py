@@ -22,21 +22,21 @@ class UploadFileHandler(tornado.web.RequestHandler):
 
 
         if not(name and student_number and phone_number):
-            self.finish(dict(result='Please input all fields!'))
-            return
+        	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Please input all fields!')
         if not student_number.isdigit():
-            self.finish(dict(result='Please input correct student number!'))
-            return
+        	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Please input correct student number!')
         
         now_time = time.strftime('%Y-%m-%dT%H-%M-%S',time.localtime(time.time()))
         dir_prefix = '_'.join([now_time, str(student_number)])
-        file_metas = self.request.files['file']
+        try:
+        	file_metas = self.request.files['file']
+        except:
+        	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Please select a file to print!')
 
         for meta in file_metas:
             filename = meta['filename']
             if not filename.endswith('.pdf'):
-                self.finish(dict(result='Not a pdf file!'))
-                return
+            	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Not a pdf file!')
             try:
                 os.makedirs(os.path.join(upload_path, dir_prefix))
             except:
@@ -49,7 +49,7 @@ class UploadFileHandler(tornado.web.RequestHandler):
             filepath = os.path.join(upload_path, dir_prefix, 'info.txt')
             with open(filepath, 'w') as info:
                 info.write('\n'.join([name, student_number, phone_number]))
-            self.finish(dict(result='success'))
+            return self.render('result.html', result='positive', result_header='Upload Success', result_content='Please connect us to get the file.')
 
 
 application = tornado.web.Application([

@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>HFUT Cloud Print</title>
+        <link rel="stylesheet" href="{{ static_url("css/semantic.min.css") }}" type="text/css" media="all" />
+    </head>
+    <body style="background-color: #CCC4C2">
+    <div class="ui white massive main menu">
+        <div class="ui container">
+            <a href="/" class="header item">
+                HFUT云打印
+            </a>
+        </div>
+    </div>
+    <div class="ui container">
+        <div class="ui segment">
+            <div class="ui {{result}} message">
+                <div class="header">{{result_header}}</div>
+                <p>{{result_content}}</p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ static_url("js/jquery.min.js") }}"></script>
+    <script src="{{ static_url("js/semantic.min.js") }}"></script>
+    </body>
+</html>
