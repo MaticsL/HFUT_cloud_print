@@ -23,21 +23,21 @@ class UploadFileHandler(tornado.web.RequestHandler):
 
 
         if not(name and student_number and phone_number):
-        	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Please input all fields!')
+        	return self.render('result.html', result='negative', result_header='上传失败', result_content='请填写完整的信息。')
         if not student_number.isdigit():
-        	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Please input correct student number!')
+        	return self.render('result.html', result='negative', result_header='上传失败', result_content='请输入正确的学号')
         
         now_time = time.strftime('%Y-%m-%dT%H-%M-%S',time.localtime(time.time()))
         dir_prefix = '_'.join([now_time, str(student_number)])
         try:
         	file_metas = self.request.files['file']
         except:
-        	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Please select a file to print!')
+        	return self.render('result.html', result='negative', result_header='上传失败', result_content='请选择需要打印的文件')
 
         for meta in file_metas:
             filename = meta['filename']
             if not filename.endswith('.pdf'):
-            	return self.render('result.html', result='negative', result_header='Upload Failed', result_content='Not a pdf file!')
+            	return self.render('result.html', result='negative', result_header='上传失败', result_content='我们只接受pdf格式的文件')
             try:
                 os.makedirs(os.path.join(upload_path, dir_prefix))
             except:
@@ -50,7 +50,7 @@ class UploadFileHandler(tornado.web.RequestHandler):
             filepath = os.path.join(upload_path, dir_prefix, 'info.txt')
             with open(filepath, 'w') as info:
                 info.write('\n'.join([name, student_number, phone_number, '-------', remark]))
-            return self.render('result.html', result='positive', result_header='Upload Success', result_content='Please connect us to get the file.')
+            return self.render('result.html', result='positive', result_header='上传成功', result_content='如需直接上门取件，请到五号楼北楼322宿舍')
 
 
 application = tornado.web.Application([
